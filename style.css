@@ -1,0 +1,58 @@
+body {
+	font-family: Arial;
+}
+
+h1, h2 {
+	text-align: center;
+}
+
+.flex-container {
+	display: flex;
+	flex-direction: row;
+	flex-wrap: nowrap;
+	justify-content: flex-start;
+	padding: 15px;
+}
+
+#left {
+	flex: 60%;
+}
+
+#right {
+	flex: 40%;
+}
+
+/* scatter plot styling and interactivity */
+.point {
+	fill: dodgerblue;
+	stroke: none;
+}
+
+.point:hover {
+	fill:  orange;
+}
+
+.selected {
+	stroke: lightgreen;
+	stroke-width: 4;
+}
+
+/* bar chart styling and interactivity */
+.bar {
+	fill: dodgerblue;
+	stroke: none;
+}
+
+.bar:hover {
+	fill: orange;
+}
+
+/* tooltip styling */
+.tooltip {
+  position: absolute;
+  background-color: lightgray;
+  border: solid;
+  border-width: 2px;
+  border-radius: 5px;
+  padding: 5px;
+}
