@@ -70,13 +70,51 @@ function build_scatter() {
 		// add click event listener to all points
 		FRAME_SCATTER.selectAll(".point")
 						.on("click", selectPoint);
+
+
+		// form submit to add points
+		function submitClicked() {
+			// get form information
+		    let xcoord = document.getElementById("xcoord"); 
+		    let ycoord = document.getElementById("ycoord");
+
+		    // x-coordinate information
+		    let selectedIndex_x = xcoord.selectedIndex;
+		    let selectedOption_x = xcoord.options[selectedIndex_x];
+		    let xValue = selectedOption_x.value;
+
+		    // y-coordinate information
+		    let selectedIndex_y = ycoord.selectedIndex;
+		    let selectedOption_y = ycoord.options[selectedIndex_y];
+		    let yValue = selectedOption_y.value;
+
+		    // adding new point to the data
+		    let newPoint = {"x": xValue, "y": yValue};
+		    let newData = [newPoint];
+
+		    // rebuild graph
+		    FRAME_SCATTER.selectAll("points")
+						.data(newData)
+						.enter()
+						.append("circle")
+							.attr("id", (d) => {return "(" + d.x + "," + d.y + ")";})
+							.attr("cx", (d) => {return (MARGINS.left + X_SCALE(d.x));})
+							.attr("cy", (d) => {return (MARGINS.top + Y_SCALE(d.y));})
+							.attr("r", 10)
+							.attr("class", "point")
+
+			// add click event listener to all points
+			FRAME_SCATTER.selectAll(".point")
+						.on("click", selectPoint);
+
+		}
+
+		// trigger function when button is clicked
+		d3.select("#subButton").on("click", submitClicked);
 		
 	});
 };
 build_scatter();
-
-
-// form submit to add points
 
 
 
