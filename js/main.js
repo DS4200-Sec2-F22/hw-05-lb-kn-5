@@ -47,15 +47,30 @@ function build_scatter() {
 						.data(data)
 						.enter()
 						.append("circle")
-							.attr("id", (d) => {"(" + d.x + "," + d.y + ")";})
+							.attr("id", (d) => {return "(" + d.x + "," + d.y + ")";})
 							.attr("cx", (d) => {return (MARGINS.left + X_SCALE(d.x));})
 							.attr("cy", (d) => {return (MARGINS.top + Y_SCALE(d.y));})
 							.attr("r", 10)
 							.attr("class", "point");
 
 		// point click functionality
-		
+		function selectPoint() {
+			let clicked = d3.select(this);
+			if (clicked.style("stroke") == "lightgreen") {
+				clicked.style("stroke", "none");
+			}
+			else {
+				clicked.style("stroke", "lightgreen").style("stroke-width", 4);
+			}
+			// display id (coordinates) of last selected point
+			let textDiv = document.getElementById("last-selected");
+			textDiv.innerHTML = "Last point clicked: " + clicked.attr("id");
+		}
 
+		// add click event listener to all points
+		FRAME_SCATTER.selectAll(".point")
+						.on("click", selectPoint);
+		
 	});
 };
 build_scatter();
